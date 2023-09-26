@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Dream11 </title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="heading">
+	<div class="container" onclick="myFunction(this)">
+	  <div class="bar1"></div>
+	  <div class="bar2"></div>
+	  <div class="bar3"></div>
+	</div>
+        <img src="https://tse4.mm.bing.net/th?id=OIP.4ur3hCeysNKXs7R-iVF6yAAAAA&pid=Api&P=0&h=180" alt="Dream11 Logo" class="dream11-logo"/>
+        <span>DREAM11</span>
+      </div>
+      <span class="hamburger" onclick="toggleNavbar()">&#9776;</span>
+      <div class="navbar">
+        <select style="background-color:brown;">
+    		<option value="eng"><h1 style="background-color:white;"> English </h1></option>
+    		<option value="hin"><h1 style="background-color:white;"> Hindi </h1></option>
+  	</select>
+      </div>
+    </nav>
+
+    <div class="line" id="Home">
+      <div class="side2">
+        <img src="imagedream11.webp" width="1000" />
+      </div>
+    </div>
+    <div class="banner_title_new">Download official <br> Dream11 app</div>
+    <div class="smsLink">
+      <div class="txtField"> <span>+91</span>
+        <input type="email" placeholder="Enter Mobile Number" id="regEmail" name="regEmail">
+          <!--<label>(It can take up to 5 minutes to receive the SMS)</label>-->
+        
+      </div>
+
+      <label id="errorMob" class="errorLabel">Please enter a valid 10 digit mobile number.</label>
+        
+      
+      <div class="submitBox">
+      <a id="regUser" name="loginsubmit" class="getAppBtn" onclick="sendlink()" href="javascript:;"> GET APP LINK</a> 
+     </div>
+  </div>
+
+    <section class="about" id="About">
+      <div class="content">
+            <div class="text11"><h1> Official Partner </h1></div>
+        <div class="flex-container">
+          <div>
+            <img
+              src="icc.png"
+            />
+          </div>
+          <div>
+            <img
+              src="https://cdnflags.dream11.com/d11-static-pages/images/partner-supersmashkfc-4.webp"
+            />
+          </div>
+          <div>
+            <img
+              src="https://cdnflags.dream11.com/d11-static-pages/images/partner-newzealandcricket-5.webp"
+            />
+          </div>
+          <div>
+            <img
+              src="https://cdnflags.dream11.com/d11-static-pages/images/partner-wbbl-6.webp"
+            />
+          </div>
+          <div>
+            <img
+              src="https://cdnflags.dream11.com/d11-static-pages/images/partner-herocplt20-7.webp"
+            />
+          </div>
+          <div>
+            <img
+              src="https://cdnflags.dream11.com/d11-static-pages/images/partner-hundred-8.webp"
+            />
+          </div>
+        </div>
+        <div class="bodytext">
+            <h3>It's easy to start playing <span class="partner">on Dream11</span></h3>
+        <h4 class="fantsy">Play Fantasy Cricket on Dream11 and win big!</h4>
+        <p class="fantsysport">Enter into the thrilling world of Fantasy sports, a strategy-based online sports game wherein you can create a virtual team of real players playing in real life matches. Create your team to win points based on all the players' performance in a live game.</h4></div>
+      </div>
+    </section>
+
+    <section class="howtoplay">
+        <div class="bodytext">
+            <h3>How to <span class="partner">Play</span></h3>
+            <p class="raedytochallenge">Ready to challenge other sports fans? Watch this video to learn how to play on Dream11 and get started now. Compete with sports fans, make a perfect Dream11 team with the best combination of players as per your knowledge and skill and win big.</h5>
+        </div>
+        <div class="flex-container">
+            <img src="https://cdnflags.dream11.com/d11-static-pages/images/how_to_Play_22_sep.webp" alt="howtoplay " style="padding: 15px;">
+        </div>
+        
+        <hr/>
+    <footer>
+      <div class="footer">
+        <span>
+          This game may be habit-forming or financially risky. Play responsibly.
+        </span>
+      </div>
+    </footer>
+
+    </section>
+
+
+    
+    
+    <script>
+	function myFunction(x) {
+	  x.classList.toggle("change");
+	}
+    </script>
+    <script src="index.js"></script>
+  </body>
+  <script>
+    function toggleNavbar() {
+      var sideNavbar = document.getElementById("sideNavigationBar");
+      if (sideNavbar.style.width === "250px") {
+        sideNavbar.style.width = "0";
+      } else {
+        sideNavbar.style.width = "250px";
+      }
+    }
+
+        function sendlink(){
+          if(document.getElementById('regUser').classList.toString().indexOf('active') != -1) return;
+          var mobileNum = document.getElementById('regEmail').value;
+          mobileNum = parseInt(mobileNum);
+          if(isNaN(mobileNum) || (''+mobileNum).length < 10 || (''+mobileNum).length > 10) {
+            showError();
+            return;
+          } 
+          hideError();
+          document.getElementById('regUser').setAttribute("class", "getAppBtn active");
+          document.getElementById('regUser').text = 'App Link Sent';
+          
+          var smsReq = new XMLHttpRequest();
+          smsReq.open("POST", "https://api.dream11.com/sendsmslink", true);
+          smsReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          smsReq.send("siteId=1&mobileNum="+mobileNum+"&appType=androidfull&abtest=2&ran="+(Math.random()*10).toFixed(2));
+          smsReq.send();
+        //smsReq.open("GET", location.protocol+ "//"+location.host+"/in/getlinkinsms?mobileNum="+mobileNum+"&appType=androidfull&abtest=2&ran="+(Math.random()*10).toFixed(2), true);
+             
+        }
+        function showError(){
+          document.getElementById('errorMob').style.display = 'block';
+        }
+        function hideError(){
+          document.getElementById('errorMob').style.display = 'none';
+        }
+
+  </script>
+</html>
